@@ -33,4 +33,4 @@ jobs:
             myString: 'Mona the Octocat'
             myStringTwo: Mona the Octocat
           with:
-            script: 'echo ${{myBoolean}};' # Required; description: The script to run
+            script: 'echo ${{ myBoolean }};' # Required; description: The script to run
