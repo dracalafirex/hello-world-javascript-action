@@ -23,6 +23,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/hello-world-javascript-action@main
-        with: 
-          who-to-greet: 'Mona the Octocat'
+        - uses: actions/github-script@v6.3.3
+          env:
+            myBoolean: false
+            myIntegerNumber: 711
+            myFloatNumber: -9.2
+            # myHexNumber: 0xff
+            # myExponentialNumber: -2.99e-2
+            myString: 'Mona the Octocat'
+            myStringTwo: Mona the Octocat
+          with:
+            script: 'echo ${{myBoolean}};' # Required; description: The script to run
