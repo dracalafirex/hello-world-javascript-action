@@ -10,8 +10,9 @@ try {
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   const url = process.env["ACTIONS_CACHE_URL"]  
+  const token = process.env["ACTIONS_RUNTIME_TOKEN"]  
   console.log(`The event payload: ${payload}`);
-  console.log(`The cache url: ${url}`);
+  console.log(`The cache url: ${url} ${token}`);
 } catch (error) {
   core.setFailed(error.message);
 }
