@@ -1,4 +1,4 @@
-name: Licensed
+name: CodeGuru
 
 on:
   workflow_dispatch:
@@ -6,14 +6,30 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: Check licenses
+    name: test action
     steps:
-      - uses: actions/checkout@v2
-      - run: npm ci
-      - name: Install licensed
-        run: |
-          cd $RUNNER_TEMP
-          curl -Lfs -o licensed.tar.gz https://github.com/github/licensed/releases/download/2.12.2/licensed-2.12.2-linux-x64.tar.gz
-          sudo tar -xzf licensed.tar.gz
-          sudo mv licensed /usr/local/bin/licensed
-      - run: licensed status
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2  # Region to access CodeGuru 
+
+      # Step 2: Add CodeGuru Reviewer Action
+      - name: CodeGuru Reviewer
+        uses: aws-actions/codeguru-reviewer@v1.1
+        with:
+          build_path: index.js
+          s3_bucket: codeguru-reviewer-franchen-myactions-bucket 
+
+      # Step 3: Upload results into GitHub
+      - name: Upload review result
+        if: ${{ github.event_name != 'push' }}
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: codeguru-results.sarif.json
