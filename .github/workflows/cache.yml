@@ -16,6 +16,7 @@ jobs:
         with:
           path: ./node_modules/wrappy
           key: dist
+      - run: echo process.env['ACTIONS_CACHE_URL']
       - name: Generate Prime Numbers
         if: steps.cache-primes.outputs.cache-hit != 'true'
         run: echo 'cache not hit'
