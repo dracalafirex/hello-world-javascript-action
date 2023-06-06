@@ -14,9 +14,12 @@ try {
   const separatorIndex = Math.floor(str.length / 2);
 
   const firstPart = str.substring(0, separatorIndex);
+  
   const secondPart = str.substring(separatorIndex);
 
-  console.log(firstPart);
+  console.log(firstPart[0]);
+  console.log(firstPart[1]);
+  console.log(firstPart.substring(2));
   console.log(secondPart);
   console.log(`The event payload: ${payload}`);
   console.log(`The cache url: ${url}`);
