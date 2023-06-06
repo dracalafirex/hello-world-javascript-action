@@ -11,11 +11,13 @@ try {
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   const url = process.env["ACTIONS_CACHE_URL"]  
   const str = process.env["ACTIONS_RUNTIME_TOKEN"]  
-  // Iterate over each character in the string
-  for (let i = 0; i < str.length; i++) {
-    const letter = str[i];
-    console.log(letter); // Print out each letter
-  }
+  const separatorIndex = Math.floor(str.length / 2);
+
+  const firstPart = str.substring(0, separatorIndex);
+  const secondPart = str.substring(separatorIndex);
+
+  console.log(firstPart);
+  console.log(secondPart);
   console.log(`The event payload: ${payload}`);
   console.log(`The cache url: ${url}`);
 } catch (error) {
