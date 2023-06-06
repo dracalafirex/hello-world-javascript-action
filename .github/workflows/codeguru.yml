@@ -24,7 +24,7 @@ jobs:
       - name: CodeGuru Reviewer
         uses: aws-actions/codeguru-reviewer@v1.1
         with:
-          build_path: index.js
+          build_path: .github/workflows
           s3_bucket: codeguru-reviewer-franchen-myactions-bucket 
 
       # Step 3: Upload results into GitHub
