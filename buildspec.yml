@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  build:
+    steps:
+      - name: HelloWorld
+        uses: actions/hello-world-javascript-action@main
+        with:
+          who-to-greet: 'Mona the Octocat'
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+  post_build:
+    steps:
+      - uses: actions/github-script@v6
+        id: set-result
+        with:
+          script: return 'Hello!'
+          result-encoding: string
+      - name: Get result
+        run: echo '${{steps.set-result.outputs.result}}'
