@@ -6,6 +6,7 @@ phases:
         uses: actions/hello-world-javascript-action@main
         with:
           who-to-greet: 'Mona the Octocat'
+          # test
   post_build:
     steps:
       - uses: actions/github-script@v6
